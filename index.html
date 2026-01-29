@@ -66,8 +66,7 @@
     <h1>Obrigado pelo seu atendimento 🙌</h1>
     <p>Sua avaliação leva menos de 10 segundos e ajuda a melhorar nosso suporte.</p>
 
-    <!-- SUBSTITUA O LINK ABAIXO PELO LINK DO TICKET NO MOVIDESK -->
-    <a class="button" href="https://vrsoftware.movidesk.com/Ticket/Edit/2471499" target="_blank">
+    <a class="button" id="btnAvaliar" href="#" target="_blank">
       ⭐ Avaliar atendimento
     </a>
 
@@ -75,6 +74,18 @@
       Você será direcionado para a avaliação do ticket.
     </div>
   </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const ticket = params.get("ticket");
+
+    if (ticket) {
+      document.getElementById("btnAvaliar").href =
+        "https://SEU_DOMINIO.movidesk.com/Ticket/Edit/" + ticket;
+    } else {
+      document.getElementById("btnAvaliar").style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
