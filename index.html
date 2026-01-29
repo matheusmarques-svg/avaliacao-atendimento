@@ -2,88 +2,97 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Obrigado pelo atendimento</title>
+  <title>Gerar link de avaliação</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
-      margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #f7f7f7;
+      background: #f4f4f4;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      margin: 0;
     }
 
     .card {
-      background: #ffffff;
-      padding: 32px 24px;
+      background: #fff;
+      padding: 28px;
       border-radius: 12px;
-      max-width: 360px;
       width: 100%;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
 
     h1 {
-      font-size: 22px;
+      font-size: 20px;
       margin-bottom: 12px;
-      color: #333;
     }
 
     p {
-      font-size: 15px;
+      font-size: 14px;
       color: #555;
-      margin-bottom: 24px;
     }
 
-    a.button {
-      display: block;
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
       background: #ff7a00;
+      border: none;
       color: #fff;
-      text-decoration: none;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
-    a.button:hover {
+    button:hover {
       background: #e66f00;
     }
 
-    .footer {
+    .result {
       margin-top: 16px;
-      font-size: 12px;
-      color: #888;
+      word-break: break-all;
+      font-size: 13px;
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h1>Obrigado pelo seu atendimento 🙌</h1>
-    <p>Sua avaliação leva menos de 10 segundos e ajuda a melhorar nosso suporte.</p>
+    <h1>Gerar link de avaliação</h1>
+    <p>Cole abaixo o link do ticket no Movidesk:</p>
 
-    <a class="button" id="btnAvaliar" href="#" target="_blank">
-      ⭐ Avaliar atendimento
-    </a>
+    <input type="text" id="movideskUrl" placeholder="https://vrsoftware.movidesk.com/#/Ticket/Detail/2471499">
 
-    <div class="footer">
-      Você será direcionado para a avaliação do ticket.
-    </div>
+    <button onclick="gerarLink()">Gerar link para o cliente</button>
+
+    <div class="result" id="resultado"></div>
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const ticket = params.get("ticket");
+    function gerarLink() {
+      const url = document.getElementById("movideskUrl").value.trim();
+      if (!url) {
+        alert("Cole o link do ticket.");
+        return;
+      }
 
-    if (ticket) {
-      document.getElementById("btnAvaliar").href =
-        "https://vrsoftware.movidesk.com/#/Ticket/Detail/" + ticket;
-    } else {
-      document.getElementById("btnAvaliar").style.display = "none";
+      const encoded = encodeURIComponent(url);
+      const finalLink =
+        "https://matheusmarques-svg.github.io/avaliacao-atendimento/avaliar.html?url=" + encoded;
+
+      document.getElementById("resultado").innerHTML =
+        "<strong>Link para o cliente:</strong><br>" +
+        "<a href='" + finalLink + "' target='_blank'>" + finalLink + "</a>";
     }
   </script>
 
